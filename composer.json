@@ -1,0 +1,19 @@
+{
+	"name": "AntonyThorpe/silverstripe-shop-bankdeposit",
+	"description": "Submodule for Silverstripe Shop that adds bank deposit as a Payment Method",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "ecommerce", "bank deposit", "direct credit"],
+	"license": "MIT",
+	"extra": {
+		"installer-name": "shop_bankdeposit",
+		"branch-alias": {
+			"dev-master": "1.*-dev"
+		}
+	},
+	"require": {
+		"burnbright/silverstripe-shop": ">=1.1.1"
+	},
+	"require-dev": {
+		"phpunit/PHPUnit": "3.7.*@stable"
+	}
+}

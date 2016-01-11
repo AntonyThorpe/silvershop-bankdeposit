@@ -1,0 +1,64 @@
+Order:
+    unpaid2:
+        Status: Unpaid
+        Created: 2015-04-21 15:23:32
+        Placed: 2015-04-21 15:33:02
+        Total: 3950
+        Member: =>Member.joebloggs
+        ShippingAddress: =>Address.address1
+        BillingAddress: =>Address.address1
+    paid2:
+        Status: Paid
+        Created: 2015-05-02 07:23:08
+        Placed: 2015-05-02 07:33:21
+        Paid: 2015-05-02 07:34:29
+        Member: =>Member.joebloggs
+        Total: 7900
+        ShippingAddress: =>Address.address1
+        BillingAddress: =>Address.address1
+    cartBD:
+        Status: Cart
+        Created: 2015-04-21 15:23:32
+        Total: 5925
+        Member: =>Member.joebloggs
+        ShippingAddress: =>Address.address1
+        BillingAddress: =>Address.address1
+Product_OrderItem:
+    item1:
+        Order: =>Order.unpaid2
+        Product: =>Product.laptop
+        Quantity: 2
+    item2:
+        Order: =>Order.unpaid2
+        Product: =>Product.bag
+        Quantity: 2
+    item3:
+        Order: =>Order.unpaid2
+        Product: =>Product.battery
+        Quantity: 2
+Product_OrderItem:
+    item1:
+        Order: =>Order.paid2
+        Product: =>Product.laptop
+        Quantity: 4
+    item2:
+        Order: =>Order.paid2
+        Product: =>Product.bag
+        Quantity: 4
+    item3:
+        Order: =>Order.paid2
+        Product: =>Product.battery
+        Quantity: 4
+Product_OrderItem:
+    item1:
+        Order: =>Order.cartBD
+        Product: =>Product.laptop
+        Quantity: 3
+    item2:
+        Order: =>Order.cartBD
+        Product: =>Product.bag
+        Quantity: 3
+    item3:
+        Order: =>Order.cartBD
+        Product: =>Product.battery
+        Quantity: 3

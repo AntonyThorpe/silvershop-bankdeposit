@@ -1,0 +1,11 @@
+---
+Name: shop_bankdeposit
+Before:
+  - 'shop/*'
+---
+SiteConfig:
+  extensions:
+    - Shop\BankDeposit\Extensions\ShopConfig
+Order:
+  extensions:
+    - Shop\BankDeposit\Extensions\Order

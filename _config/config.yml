@@ -1,0 +1,8 @@
+---
+Name: shop_bankdeposit
+Before:
+  - 'shop/*'
+---
+OrderProcessor:
+  bank_deposit_send_confirmation: true
+
