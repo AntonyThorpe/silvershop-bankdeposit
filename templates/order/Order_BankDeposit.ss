@@ -1,5 +1,5 @@
 <%-- Bank Deposit table for Order/Invoice on Account page --%>
-<table id="BankDepositTable" class="infotable">
+<table id="BankDepositTable" class="infotable" cellspacing="0" cellpadding="0" summary="<% _t('BankDepositInformation','Bank Deposit Information') %>" >
 	<thead>
 		<tr class="gap mainHeader">
 			<th>
@@ -7,25 +7,21 @@
 			</th>
 		</tr>
 	</thead>
-	</tbody>
+	<tbody>
 		<tr>
 			<td>
 				<% with SiteConfig %>
 					<% if $BankAccountNumber %>
-						<p>
-							<% _t("BankAccountNumberTitle", "Bank Account Number: ") %>	
-							$BankAccountNumber
-						</p>
+						<% _t("BankAccountNumberTitle", "Bank Account Number: ") %>
+									$BankAccountNumber
+						<br/>
 					<% end_if %>
 					<% if $BankAccountDetails %>
-						<p>
-							$BankAccountDetails
-						</p>
+						$BankAccountDetails
+						<br/>
 					<% end_if %>
 					<% if $BankAccountInvoiceMessage %>
-						<p>
-							$BankAccountInvoiceMessage
-						</p>
+						$BankAccountInvoiceMessage
 					<% end_if %>
 				<% end_with %>
 			</td>

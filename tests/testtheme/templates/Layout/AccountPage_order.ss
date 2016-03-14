@@ -4,7 +4,7 @@
 	<% if Order %>
 		<% with Order %>
 			
-			<%-- SS Shop Bank Deposit --%>
+			<%-- Silvershop Bank Deposit --%>
 			<% if $Status == "Unpaid" %>
 				<% include Order_BankDepositNeededStatement %>
 			<% end_if %>

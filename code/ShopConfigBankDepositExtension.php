@@ -17,7 +17,7 @@ class ShopConfig extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->addFieldsToTab(
-            'Root.Shop.ShopTabs.BankAccount',
+            'Root.Shop.ShopTabs.' . _t('ShopConfig.BANKACCOUNTTITLE', 'Bank Account'),
             array(
                 Textfield::create("BankAccountPaymentMethodMessage", _t("ShopConfig.BANKACCOUNTPAYMENTMETHODMESSAGE", "Payment Method message on Checkout page"))
                     ->setDescription(_t("ShopConfig.BANKACCOUNTPAYMENTMETHODMESSAGEDESCRIPTION", "Message to appear in the Payment Method section of Checkout Page")),

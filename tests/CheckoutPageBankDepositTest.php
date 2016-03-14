@@ -3,16 +3,16 @@
 /**
  * Test CheckoutPageBankDeposit
  *
- * @package shop
+ * @package silvershop
  * @subpackage tests
  */
 class CheckoutPageBankDepositTest extends FunctionalTest
 {
     protected static $fixture_file = array(
-        'shop/tests/fixtures/Pages.yml',
-        'shop/tests/fixtures/shop.yml',
-        'shop/tests/fixtures/Orders.yml',
-        'shop_bankdeposit/tests/orders.yml'
+        'silvershop/tests/fixtures/Pages.yml',
+        'silvershop/tests/fixtures/shop.yml',
+        'silvershop/tests/fixtures/Orders.yml',
+        'silvershop-bankdeposit/tests/orders.yml'
     );
 
     //protected static $disable_theme = true;

@@ -2,22 +2,23 @@
 /**
  * Test AccountPageBankDepositTest
  *
- * @package shop
+ * @package silvershop
  * @subpackage tests
  */
 class AccountPageBankDepositTest extends FunctionalTest
 {
     protected static $fixture_file = array(
-        'shop/tests/fixtures/Pages.yml',
-        'shop/tests/fixtures/shop.yml',
-        'shop/tests/fixtures/Orders.yml',
-        'shop_bankdeposit/tests/orders.yml'
+        'silvershop/tests/fixtures/Pages.yml',
+        'silvershop/tests/fixtures/shop.yml',
+        'silvershop/tests/fixtures/Orders.yml',
+        'silvershop-bankdeposit/tests/orders.yml'
     );
     //protected static $disable_theme = true;
     protected static $use_draft_site = true;
 
     public function setUp()
     {
+        $this->useTestTheme(dirname(__FILE__), 'testtheme', function(){});
         parent::setUp();
         $siteconfig = DataObject::get_one('SiteConfig');
         $siteconfig->BankAccountPaymentMethodMessage = "You will be notified of the bank account details";

@@ -1,5 +1,5 @@
 <%--  Bank Deposit Needed Statement for top of Order/Invoice --%>
-<table class="bank-deposit-needed-statement">
+<table id="bank-deposit-needed-statement" cellspacing="0" cellpadding="0" border="0" summary="<% _t('BankDepositInformation','Bank Deposit Information') %>" >
 	<tbody>
 		<tr class="bank-deposit-needed-statement-first">
 			<td>
@@ -8,7 +8,7 @@
 			 	<% _t("IntroductionMessageContinueFirstLine"," into") %>
 			</td>
 		</tr>
-		<tr class="bank-deposit-needed-statement-middle">
+		<tr>
 			<td>
 			 	<% _t("BankAccountNumberTitle", "Bank Account Number: ") %>
 			 	<% with SiteConfig %>
@@ -16,7 +16,7 @@
 			 	<% end_with %>
 			</td>
 		</tr>
-		<tr class="bank-deposit-needed-statement-middle">
+		<tr>
 			<td>
 			 	<% _t("DepositReference", "Reference: ") %>
 			 		<strong>$Reference</strong>
