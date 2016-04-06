@@ -1,12 +1,11 @@
 {
 	"name": "AntonyThorpe/silvershop-bankdeposit",
-	"description": "Submodule for Silvershop that adds bank deposit as a Payment Method",
+	"description": "Silvershop submodule that adds bank deposit as a Payment Method",
 	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "silvershop", "ecommerce", "bank deposit", "direct credit"],
-	"license": "MIT",
+	"keywords": ["Silverstripe", "silvershop", "shop", "ecommerce", "bank deposit", "direct credit"],
 	"require": {
-		"silvershop/core": "~1.0",
-     "burnbright/silverstripe-omnipay" : "~1.1"
+		"silvershop/core": "^1.2",
+		"burnbright/silverstripe-omnipay": "^1.1"
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "3.7.*@stable"
@@ -17,6 +16,7 @@
 			"dev-master": "1.*-dev"
 		}
 	},
+	"license": "MIT",
 	"suggest": {
 		"markguinn/silverstripe-email-helpers": "Contains a replacement Mailer object that utilises PHPMailer to send inlined CSS emails via SMTP"
 	}
