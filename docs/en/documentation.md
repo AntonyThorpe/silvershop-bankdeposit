@@ -67,7 +67,6 @@ Email:
   admin_email: example@example.com
 
 OrderEmailNotifier:
-  bcc_confirmation_to_admin: true  #if not already set to true by Silvershop
+  bcc_confirmation_to_admin: true
 ```
-
-For more information see [Enable / disable sending of emails](https://github.com/silvershop/core/blob/master/docs/en/02_Customisation/Emails.md)
+For more information see [Enable / disable sending of emails](https://github.com/silvershop/silvershop-core/blob/master/docs/en/02_Customisation/Emails.md)
