@@ -1,10 +1,10 @@
 ---
-Name: shop_bankdeposit
+Name: silvershop-bankdeposit-extensions
 After: silvershop/config#shopconfig
 ---
 SiteConfig:
   extensions:
-    - Shop\BankDeposit\Extensions\ShopConfig
+    - SilvershopBankDeposit\Cms\ShopConfig
 Order:
   extensions:
-    - Shop\BankDeposit\Extensions\Order
+    - SilvershopBankDeposit\Model\Order

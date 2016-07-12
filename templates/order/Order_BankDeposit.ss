@@ -1,9 +1,9 @@
 <%-- Bank Deposit table for Order/Invoice on Account page --%>
-<table id="BankDepositTable" class="infotable" cellspacing="0" cellpadding="0" summary="<% _t('BankDepositInformation','Bank Deposit Information') %>" >
+<table id="BankDepositTable" class="infotable" cellspacing="0" cellpadding="0" summary="<%t BankDeposit.Information "Bank Deposit Information" %>" >
 	<thead>
 		<tr class="gap mainHeader">
 			<th>
-				<% _t("BankDepositHeading","Bank Deposit") %>
+				<%t BankDeposit.Heading "Bank Deposit" %>
 			</th>
 		</tr>
 	</thead>
@@ -12,8 +12,8 @@
 			<td>
 				<% with SiteConfig %>
 					<% if $BankAccountNumber %>
-						<% _t("BankAccountNumberTitle", "Bank Account Number: ") %>
-									$BankAccountNumber
+						<%t BankDeposit.BankAccountNumberTitle "Bank Account Number: " %>
+							$BankAccountNumber
 						<br/>
 					<% end_if %>
 					<% if $BankAccountDetails %>

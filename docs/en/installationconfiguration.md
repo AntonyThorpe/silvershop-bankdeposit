@@ -11,4 +11,10 @@ Payment:
   allowed_gateways:
     - 'Manual'
 ```
-Then `{example.net}/dev/build/`
+To change 'Bank Deposit' to something else then create `mysite/lang/en.yml`:
+```yml
+en:
+  Gateway:
+    Manual: Bank Deposit Changed
+```
+Then `{example.net}/dev/build/?flush=1`

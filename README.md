@@ -1,8 +1,9 @@
 # silvershop-bankdeposit
-A Silvershop submodule that adds bank deposit as a payment method
+A Silvershop submodule that adds bank deposit as a Payment Method
 
 [![Build Status](https://travis-ci.org/AntonyThorpe/silvershop-bankdeposit.svg?branch=master)](https://travis-ci.org/AntonyThorpe/silvershop-bankdeposit)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/antonythorpe/silvershop-bankdeposit/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/antonythorpe/silvershop-bankdeposit/?branch=master)
+![helpfulrobot](https://helpfulrobot.io/antonythorpe/silvershop-bankdeposit/badge)
 [![Latest Stable Version](https://poser.pugx.org/antonythorpe/silvershop-bankdeposit/v/stable)](https://packagist.org/packages/antonythorpe/silvershop-bankdeposit)
 [![Total Downloads](https://poser.pugx.org/antonythorpe/silvershop-bankdeposit/downloads)](https://packagist.org/packages/antonythorpe/silvershop-bankdeposit)
 [![Latest Unstable Version](https://poser.pugx.org/antonythorpe/silvershop-bankdeposit/v/unstable)](https://packagist.org/packages/antonythorpe/silvershop-bankdeposit)
@@ -21,7 +22,7 @@ A Silvershop submodule that adds bank deposit as a payment method
 * [Silvershop module (a Silverstripe module)](https://github.com/silvershop/silvershop-core)
 
 ## Warning
-It is assumed that people accessing the Setting folder can be trusted.  This is where the bank account number is entered.  If you think that a YAML file would be more secure, then please feel free to submit a pull request.
+It is assumed that people accessing the Settings folder can be trusted.  This is where the bank account number is entered.  If you think that a YAML file would be more secure, then please feel free to submit a pull request.
 
 ## Documentation
 [Index](/docs/en/index.md)
@@ -29,10 +30,13 @@ It is assumed that people accessing the Setting folder can be trusted.  This is 
 ## Support
 None sorry.
 
+## Change Log
+[Link](changelog.md)
+
 ## Contributions
-Pull requests welcome!  PSR-2 please.
+[Link](contributing.md)
 
 ## License
-[MIT](LICENCE)
+[MIT](LICENSE)
 
 

@@ -7,18 +7,20 @@
 	<table id="OutstandingTable" class="infotable" cellpadding="0" cellspacing="0" >
 		<tbody>
 			<tr class="gap summary" id="Outstanding">
-				<th colspan="4" scope="row" class="threeColHeader"><strong><% _t("TOTALOUTSTANDING","Total outstanding") %></strong></th>
+				<th colspan="4" scope="row" class="threeColHeader">
+					<strong><%t Order.TotalOutstanding "Total outstanding" %></strong>
+				</th>
 				<td class="right">
 					<strong>
-
+					
 						<%-- Silvershop Bank Deposit --%>
 						<% if $Status == "Unpaid" %>
 							$TotalOutstanding.Nice
 						<% else %>
 							<% if $Status == "MemberCancelled" || $Status == "AdminCancelled" %>
-								<% _t("ORDERCANCELLED","Order Cancelled") %>
+								<%t Order.STATUS_MEMBERCANCELLED "Order Cancelled" %>
 							<% else %>
-								<% _t("PAIDMESSAGEORDER","Paid with thanks") %>
+								<%t Order.STATUS_PAID "Paid" %>
 							<% end_if %>
 						<% end_if %>
 
@@ -33,7 +35,7 @@
 	<table id="NotesTable" class="infotable">
 		<thead>
 			<tr>
-				<th><% _t("ORDERNOTES","Notes") %></th>
+				<th><%t Order.db_Notes "Notes" %></th>
 			</tr>
 		</thead>
 		<tbody>

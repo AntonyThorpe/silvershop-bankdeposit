@@ -1,6 +1,6 @@
 en:
-  Payment:
-    Manual: "Bank Deposit"
+  Gateway:
+    Manual: Bank Deposit
   OrderNotifier:
     TITLE: "Your business name - Tax Invoice #%d"
     RECEIPTSUBJECT: "Your business name - Tax Invoice #%d"

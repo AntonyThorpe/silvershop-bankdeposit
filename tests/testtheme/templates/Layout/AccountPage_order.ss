@@ -9,7 +9,7 @@
 				<% include Order_BankDepositNeededStatement %>
 			<% end_if %>
 
-			<h2><% _t('AccountPage.ss.ORDER','Order') %> $Reference ($Created.Long)</h2>
+			<h2><%t Order.OrderHeadline "Order #{OrderNo} {OrderDate}" OrderNo=$Reference OrderDate=$Created.Nice %></h2>
 		<% end_with %>
 	<% end_if %>
 	<% if Message %>
@@ -20,7 +20,7 @@
 			<% include Order %>
 		<% end_with %>
 		
-		<%-- SS Shop Bank Deposit --%>
+		<%-- Silvershop Bank Deposit --%>
 		<% if $Order.Status == "Unpaid" %>
 			$ActionsForm
 		<% end_if %>

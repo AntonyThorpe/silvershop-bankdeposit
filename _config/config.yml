@@ -1,6 +1,6 @@
 ---
-Name: shop_bankdeposit
-After: silvershop/config#shopconfig
+Name: silvershop-bankdeposit-config
+After: config#shopconfig
 ---
 OrderProcessor:
   bank_deposit_send_confirmation: true

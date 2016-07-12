@@ -1,4 +1,4 @@
-<?php namespace Shop\BankDeposit\Extensions;
+<?php namespace SilvershopBankDeposit\Cms;
 
 use DataExtension;
 use FieldList;
