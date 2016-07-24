@@ -4,7 +4,7 @@
 	"type": "silverstripe-module",
 	"keywords": ["Silverstripe", "silvershop", "shop", "ecommerce", "bank deposit", "direct credit"],
 	"require": {
-		"silvershop/core": "^2.0",
+		"silvershop/core": "^2.0.0",
 		"omnipay/manual": "^2.2"
 	},
 	"require-dev": {
