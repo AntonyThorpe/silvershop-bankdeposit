@@ -1,5 +1,21 @@
 <?php
 
+namespace AntonyThorpe\SilverShopBankDeposit\Tests;
+
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Member;
+use SilverShop\Tests\ShopTest;
+use SilverShop\Extension\SteppedCheckoutExtension;
+use SilverShop\Page\Product;
+use SilverShop\Page\CheckoutPage;
+use SilverShop\Page\AccountPage;
+use SilverShop\Model\Order;
+use SilverShop\Cart\ShoppingCart;
+use SilverShop\Cart\ShoppingCartController;
+
 /**
  * Test that the Manual payment method can be used on a stepped checkout and
  * that an email is sent upon completing the form
@@ -7,23 +23,27 @@
 class BankDepositCheckoutPageTest extends FunctionalTest
 {
     protected static $fixture_file = array(
-        'silvershop/tests/fixtures/Pages.yml',
-        'silvershop/tests/fixtures/shop.yml',
-        'silvershop/tests/fixtures/Orders.yml',
-        'silvershop-bankdeposit/tests/orders.yml'
+        'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
+        'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
+        'vendor/silvershop/core/tests/php/Fixtures/Orders.yml',
+        'orders.yml'
     );
+
+    protected static $disable_theme  = true;
+
+    /**
+     * @var laptop
+     */
+    protected $laptop;
 
     public function setUp()
     {
         parent::setUp();
         ShopTest::setConfiguration();
-        SteppedCheckout::setupSteps(); //use default steps
-        //set supported gateways
-        Payment::config()->allowed_gateways = array(
-            'Manual',
-            'Dummy'
-        );
-        $siteconfig = DataObject::get_one('SiteConfig');
+        ShoppingCart::singleton()->clear();
+        SteppedCheckoutExtension::setupSteps(); //use default steps
+
+        $siteconfig = DataObject::get_one(SiteConfig::class);
         $siteconfig->BankAccountPaymentMethodMessage = "You will be notified of the bank account details";
         $siteconfig->BankAccountNumber = "XX-3456-7891011-XX";
         $siteconfig->BankAccountDetails = "TestBank, Business Branch";
@@ -31,90 +51,109 @@ class BankDepositCheckoutPageTest extends FunctionalTest
         $siteconfig->write();
 
         // establish products
-        $this->laptop = $this->objFromFixture("Product", "laptop");
-        $this->laptop->publish('Stage', 'Live');
-        $this->bag = $this->objFromFixture("Product", "bag");
-        $this->bag->publish('Stage', 'Live');
-        $this->battery = $this->objFromFixture("Product", "battery");
-        $this->battery->publish('Stage', 'Live');
+        $this->laptop = $this->objFromFixture(Product::class, "laptop");
+        $this->laptop->publishSingle();
 
         // publish pages
-        $checkoutpage = $this->objFromFixture("CheckoutPage", "checkout");
-        $checkoutpage->publish('Stage', 'Live');
-        $accountpage = $this->objFromFixture("AccountPage", "accountpage");
-        $accountpage->publish('Stage', 'Live');
+        $checkoutpage = $this->objFromFixture(CheckoutPage::class, "checkout");
+        $checkoutpage->publishSingle();
+
+        $accountpage = $this->objFromFixture(AccountPage::class, "accountpage");
+        $accountpage->publishSingle();
 
         // Login member
-        $member = $this->objFromFixture("Member", "joebloggs");
+        $member = $this->objFromFixture(Member::class, "joebloggs");
         $this->logInAs($member);
 
-        // create a cart
-        $this->cart = $this->objFromFixture("Order", "cartBD");
-        ShoppingCart::singleton()->setCurrent($this->cart);
+        //add item to cart via url
+        $this->get(ShoppingCartController::add_item_link($this->laptop));
     }
 
-    public function testEmailIsSent()
+    public function testEmailIsSentUponStepCheckoutCompletion()
     {
-        $page = $this->get("checkout/");
-        $this->assertEquals(200, $page->getStatusCode(), "contact details page should load");
+        $self = $this;
+        $this->useTestTheme(
+            dirname(__FILE__),
+            'testtheme',
+            function () use ($self) {
+                $page = $self->get("checkout/");
+                $self->assertEquals(
+                    200,
+                    $page->getStatusCode(),
+                    "contact details page should load"
+                );
 
-        // contact form
-        $page = $this->submitForm("CheckoutForm_ContactDetailsForm", "action_checkoutSubmit", array(
-            'CustomerDetailsCheckoutComponent_FirstName' => 'Joe',
-            'CustomerDetailsCheckoutComponent_Surname' => 'Bloggs',
-            'CustomerDetailsCheckoutComponent_Email' => 'test@example.com'
-        ));
-        $this->assertEquals(
-            200,
-            $page->getStatusCode(),
-            "enter contact details page should load"
-        );
-        
-        // Shipping Address form
-        $page = $this->submitForm("CheckoutForm_ShippingAddressForm", "action_setshippingaddress", array(
-            'ShippingAddressCheckoutComponent_Country' => 'AU',
-            'ShippingAddressCheckoutComponent_Address' => '201-203 BROADWAY AVE',
-            'ShippingAddressCheckoutComponent_AddressLine2' => 'U 235',
-            'ShippingAddressCheckoutComponent_City' => 'WEST BEACH',
-            'ShippingAddressCheckoutComponent_State' => 'South Australia',
-            'ShippingAddressCheckoutComponent_PostalCode' => '5024',
-            'ShippingAddressCheckoutComponent_Phone' => '',
-            'SeperateBilling' => '0'
+                // contact form
+                $page = $self->submitForm("CheckoutForm_ContactDetailsForm", "action_checkoutSubmit", array(
+                    'CustomerDetailsCheckoutComponent_FirstName' => 'Joe',
+                    'CustomerDetailsCheckoutComponent_Surname' => 'Bloggs',
+                    'CustomerDetailsCheckoutComponent_Email' => 'test@example.com'
+                ));
+                $self->assertEquals(
+                    200,
+                    $page->getStatusCode(),
+                    "enter contact details page should load"
+                );
 
-        ));
-        $this->assertEquals(
-            200,
-            $page->getStatusCode(),
-            "payment methods page should load"
-        );
+                // Shipping Address form
+                $page = $self->submitForm("CheckoutForm_ShippingAddressForm", "action_setshippingaddress", array(
+                    'ShippingAddressCheckoutComponent_Country' => 'AU',
+                    'ShippingAddressCheckoutComponent_Address' => '201-203 BROADWAY AVE',
+                    'ShippingAddressCheckoutComponent_AddressLine2' => 'U 235',
+                    'ShippingAddressCheckoutComponent_City' => 'WEST BEACH',
+                    'ShippingAddressCheckoutComponent_State' => 'South Australia',
+                    'ShippingAddressCheckoutComponent_PostalCode' => '5024',
+                    'ShippingAddressCheckoutComponent_Phone' => '',
+                    'SeperateBilling' => '0'
 
-        // Payment Method
-        $page = $this->submitForm("CheckoutForm_PaymentMethodForm", "action_setpaymentmethod", array(
-            'PaymentMethod' => 'Manual',
-        ));
-        $this->assertEquals(
-            200,
-            $page->getStatusCode(),
-            "enter summary page should load"
-        );
+                ));
+                $self->assertEquals(
+                    200,
+                    $page->getStatusCode(),
+                    "payment methods page should load"
+                );
 
-        // Summary
-        $page = $this->submitForm("PaymentForm_ConfirmationForm", "action_checkoutSubmit", array(
-            'PaymentForm_ConfirmationForm_Notes' => 'Test',
-        ));
-        $this->assertEquals(
-            200,
-            $page->getStatusCode(),
-            "enter summary page should load"
-        );
-        $this->assertContains(
-            '<h2>My Account</h2>',
-            $page->getBody(),
-            "Account Page should load"
-        );
+                $self->assertContains(
+                    "CheckoutForm_PaymentMethodForm_PaymentMethod_Manual",
+                    $page->getBody(),
+                    "Manual payment method available"
+                );
 
-        $this->assertEmailSent(
-            'test@example.com'
+                // Payment Method can be manual
+                $page = $self->submitForm("CheckoutForm_PaymentMethodForm", "action_setpaymentmethod", array(
+                    'PaymentMethod' => 'Manual',
+                ));
+                $self->assertEquals(
+                    200,
+                    $page->getStatusCode(),
+                    "enter summary page should load"
+                );
+
+                // Summary
+                $page = $self->submitForm("PaymentForm_ConfirmationForm", "action_checkoutSubmit", array(
+                    'PaymentForm_ConfirmationForm_Notes' => 'Test',
+                ));
+                $self->assertEquals(
+                    200,
+                    $page->getStatusCode(),
+                    "enter summary page should load"
+                );
+                $self->assertContains(
+                    '<h2>My Account</h2>',
+                    $page->getBody(),
+                    "Account Page should load"
+                );
+
+                $self->assertContains(
+                    'XX-3456-7891011-XX',
+                    $page->getBody(),
+                    "Account Page contains bank deposit instructions"
+                );
+
+                $self->assertEmailSent(
+                    'test@example.com'
+                );
+            }
         );
     }
 }

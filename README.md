@@ -3,7 +3,6 @@ A Silvershop submodule that adds bank deposit as a Payment Method
 
 [![Build Status](https://travis-ci.org/AntonyThorpe/silvershop-bankdeposit.svg?branch=master)](https://travis-ci.org/AntonyThorpe/silvershop-bankdeposit)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/antonythorpe/silvershop-bankdeposit/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/antonythorpe/silvershop-bankdeposit/?branch=master)
-![helpfulrobot](https://helpfulrobot.io/antonythorpe/silvershop-bankdeposit/badge)
 [![Latest Stable Version](https://poser.pugx.org/antonythorpe/silvershop-bankdeposit/v/stable)](https://packagist.org/packages/antonythorpe/silvershop-bankdeposit)
 [![Total Downloads](https://poser.pugx.org/antonythorpe/silvershop-bankdeposit/downloads)](https://packagist.org/packages/antonythorpe/silvershop-bankdeposit)
 [![Latest Unstable Version](https://poser.pugx.org/antonythorpe/silvershop-bankdeposit/v/unstable)](https://packagist.org/packages/antonythorpe/silvershop-bankdeposit)
@@ -38,5 +37,3 @@ None sorry.
 
 ## License
 [MIT](LICENSE)
-
-

@@ -1,8 +1,0 @@
-en:
-  Gateway:
-    Manual: Bank Deposit
-  OrderNotifier:
-    TITLE: "Your business name - Tax Invoice #%d"
-    RECEIPTSUBJECT: "Your business name - Tax Invoice #%d"
-    CONFIRMATIONSUBJECT: "Your business name - Tax Invoice #%d - Please deposit funds"
-    ADMINNOTIFICATIONSUBJECT: "Admin notification - Tax Invoice #%d"

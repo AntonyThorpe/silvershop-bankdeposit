@@ -2,7 +2,7 @@
 
 ## Getting Started
 * In Admin, click Settings/Shop/Bank Account and add your organisation's details
-* Provide a message to the customer when they select Bank Deposit as a payment method in the checkout process.  Copy Silvershop's CheckoutPage.ss to your theme's `templates/Layout` folder and add:
+* Stepped Checkout only: provide a message to the customer when they select Bank Deposit as a payment method in the checkout process.  Copy Silvershop's `SteppedCheckoutPage.ss` from `templates/SilverShop/Page/Layout` into `themes/{yourtheme}/templates/SilverShop/Page/Layout` folder and add in the payment method section:
 ```html
     <% with SiteConfig %>
         <div>
@@ -10,19 +10,14 @@
         </div>
     <% end_with %>
 ```
-* Following completion of the checkout steps, on the order review page, provide an opening statement to encourage the customer to make a transfer into your organisation's bank account.  Copy both Checkout_order.ss (for guests) and AccountPage_order.ss (for members) from Silvershop's `templates/Layout` into `{yourtheme}/templates/Layout` and add:
+* Following completion of the checkout steps, on the order review page, provide an opening statement to encourage the customer to promptly make a transfer into your organisation's bank account.  Copy both `CheckoutPage_order.ss` (for guests) and `AccountPage_order.ss` (for members) from Silvershop's `templates/SilverShop/Page/Layout` into `themes/{yourtheme}/templates/SilverShop/Page/Layout` and add:
 ```html
     <%-- before the order --%>
     <% if $Status == "Unpaid" %>
-        <% include Order_BankDepositNeededStatement %>
-    <% end_if %>
-    ...
-    <%-- after include Order --%>
-    <% if $Order.Status == "Unpaid" %>
-        $ActionsForm
+        <% include SilverShop\Model\Order_BankDepositNeededStatement %>
     <% end_if %>
 ```
-* Provide some customisation to the Total Outstanding for cancelled orders.  Copy Order.ss from Silvershop's templates/order into `{yourtheme}/templates/order` and replace `$TotalOutstanding.Nice` with:
+* Provide some customisation to the Total Outstanding for cancelled orders.  Copy `Order.ss` from Silvershop's `templates/SilverShop/Model` into `themes/{yourtheme}/templates/SilverShop/Model/Order.ss` and replace `$TotalOutstanding.Nice` with:
 ```html
     <% if $Status == "Unpaid" %>
         $TotalOutstanding.Nice
@@ -34,14 +29,14 @@
         <% end_if %>
     <% end_if %>
 ```
-In addition, provide full instructions beneath the Notes table:
+* In addition, provide full instructions beneath the Notes table of `Order.ss`:
 ```html
     <% if Total %>
         <% if TotalOutstanding %>
             <% if Payments %>
                 <% loop Payments.last %>
                     <% if GatewayTitle == "Bank Deposit" %>
-                        <% include Order_BankDeposit %>
+                        <% include SilverShop\Model\Order_BankDeposit %>
                     <% end_if %>
                 <% end_loop %>
             <% end_if %>
@@ -49,24 +44,13 @@ In addition, provide full instructions beneath the Notes table:
     <% end_if %>
 ```
 
-Examples are available under the test folder.
+An `AccountPage_order` example is available under `tests/testtheme/SilverShop` folder.
 
-## Sending Email Confirmations
-Emailing a copy of an unpaid Order to the customer with your bank deposit details is enabled by default.  To deactivate:
-```yml
-OrderProcessor:
-  bank_deposit_send_confirmation: false
-```
-To customise copy `shop/templates/email/Order_ConfirmationEmail.ss` to `themes/yourname/templates/email/Order_ConfirmationEmail.ss` and arrange/style as needed.
+## Email Customisations
+To customise copy SilverShop's `templates/SilverShop/Model/Order_ConfirmationEmail.ss` to `themes/{yourname}/templates/SilverShop/Model/Order_ConfirmationEmail.ss` and arrange/style as needed.
 
-The email will need your subject.  Override the default in your `mysite/lang/en.yml` file (see `lang/en.yml` for an example).
+Ditto with `Order_AdminNotificationEmail.ss` and `Order_ReceiptEmail`.
 
-In addition, if you want a blind copy:
-```yml
-Email:
-  admin_email: example@example.com
+Override the defaults in your `app/lang/en.yml` file (see SilverShop's `lang/en.yml` for an example).
 
-OrderEmailNotifier:
-  bcc_confirmation_to_admin: true
-```
 For more information see [Enable / disable sending of emails](https://github.com/silvershop/silvershop-core/blob/master/docs/en/02_Customisation/Emails.md)

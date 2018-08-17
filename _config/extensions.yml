@@ -1,10 +1,10 @@
 ---
 Name: silvershop-bankdeposit-extensions
-After: silvershop/config#shopconfig
+After: '#silvershop-extensions'
 ---
-SiteConfig:
+SilverStripe\SiteConfig\SiteConfig:
   extensions:
-    - SilvershopBankDeposit\Cms\ShopConfig
-Order:
+    - AntonyThorpe\SilvershopBankDeposit\ShopConfigExtension
+SilverShop\Model\Order:
   extensions:
-    - SilvershopBankDeposit\Model\Order
+    - AntonyThorpe\SilvershopBankDeposit\Order

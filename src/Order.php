@@ -1,9 +1,11 @@
-<?php namespace SilvershopBankDeposit\Model;
+<?php
 
-use DataExtension;
-use Checkout;
-use OrderProcessor;
+namespace AntonyThorpe\SilvershopBankDeposit;
+
 use SilverStripe\Omnipay\GatewayInfo;
+use SilverShop\Checkout\Checkout;
+use SilverShop\Checkout\OrderProcessor;
+use SilverStripe\ORM\DataExtension;
 
 class Order extends DataExtension
 {

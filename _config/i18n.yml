@@ -1,7 +1,0 @@
----
-Name: silvershop-bankdeposit-defaulti18n
----
-i18n:
-  module_priority:
-    - silvershop-bankdeposit
-    - silvershop
