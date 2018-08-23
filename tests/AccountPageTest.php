@@ -16,7 +16,7 @@ use SilverShop\Model\Order;
 /**
  * Ensure that the template includes work on the AccountPage
  */
-class BankDepositAccountPageTest extends FunctionalTest
+class AccountPageTest extends FunctionalTest
 {
     protected static $fixture_file = array(
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
@@ -26,7 +26,7 @@ class BankDepositAccountPageTest extends FunctionalTest
     );
 
     /**
-     * @var AccountPage
+     * @var SilverStripe\ORM\DataObject
      */
     protected $accountpage;
 

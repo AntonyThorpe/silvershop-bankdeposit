@@ -10,12 +10,12 @@ A Silvershop submodule that adds bank deposit as a Payment Method
 
 ## Features
 * Provides a Bank Account tab under Settings/Shop to add your organisation's bank account number and payment messages
-* Includes bank account number & messages in emails, the order review, and during the checkout process
+* Includes bank account number & messages in emails, the order review, and a note during the checkout process
 * Localisation options available
 
 ## How it works
-* Utilises the 'Manual' payment method (names it "Bank Deposit")
-* You add various includes to your templates
+* Utilises the 'Manual' payment method
+* You add various includes to your templates plus customisations via language file
 
 ## Requirements
 * [Silvershop module (a Silverstripe module)](https://github.com/silvershop/silvershop-core)

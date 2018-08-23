@@ -48,15 +48,15 @@
 <% end_if %>
 
 <%-- Silvershop Bank Deposit --%>
-<% if Total %>
-	<% if TotalOutstanding %>
-		<% if Payments %>
-			<% loop Payments.last %>
-				<% if GatewayTitle == "Bank Deposit" %>
-					<% include SilverShop\Model\Order_BankDeposit %>
-				<% end_if %>
-			<% end_loop %>
-		<% end_if %>
-	<% end_if %>
+<% if $Total %>
+    <% if $TotalOutstanding %>
+        <% if $Payments %>
+            <% loop $Payments.last %>
+                <% if $GatewayTitle == "Bank Deposit" %>
+                    <% include SilverShop\Model\Order_BankDeposit %>
+                <% end_if %>
+            <% end_loop %>
+        <% end_if %>
+    <% end_if %>
 <% end_if %>
 <%-- end Silvershop Bank Deposit --%>
