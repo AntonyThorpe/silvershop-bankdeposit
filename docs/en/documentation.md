@@ -14,6 +14,13 @@
 * Following completion of the checkout steps, on the order review page, provide an opening statement to encourage the customer to promptly make a transfer into the organisation's bank account.  Copy both `CheckoutPage_order.ss` (for guests) and `AccountPage_order.ss` (for members) from Silvershop's `templates/SilverShop/Page/Layout` into `themes/{yourtheme}/templates/SilverShop/Page/Layout` and add:
 ```html
     <%-- before the order --%>
+    <% if $Member %>
+        <% with $Member %>
+            Hi $FirstName
+        <% end_with %>
+    <% else %>
+        Hi $FirstName
+    <% end_if %>
     <% if $Status == "Unpaid" %>
         <% include SilverShop\Model\Order_BankDepositNeededStatement %>
     <% end_if %>
@@ -62,8 +69,11 @@ Here is an example:
             <% include SilverShop\Model\Order_BankDepositNeededStatement %>
         <% end_if %>
         Thanks
+        <br/>
         Kind regards
-        Your Name
+        <br/>
+        The Ecommerce Team
+        <br/>
     <% end_with %>
 <% end_if %>
 ```
