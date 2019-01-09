@@ -19,6 +19,8 @@ A Silvershop submodule that adds bank deposit as a Payment Method
 
 ## Requirements
 * [Silvershop module (a Silverstripe module)](https://github.com/silvershop/silvershop-core)
+* [Omnipay/Manual](https://github.com/thephpleague/omnipay-manual)
+* Will need `composer require league/omnipay:^3` too.
 
 ## Warning
 It is assumed that people accessing the Settings folder can be trusted.  This is where the bank account number is entered.  If you think that a YAML file would be more secure, then please feel free to submit a pull request.

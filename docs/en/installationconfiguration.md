@@ -1,6 +1,7 @@
 # Installation and Configuration of Silvershop Bank Deposit
 
 # Installation
+`composer require league/omnipay:^3` if using Guzzle.
 `composer require antonythorpe/silvershop-bankdeposit`
 
 ## Configuration
