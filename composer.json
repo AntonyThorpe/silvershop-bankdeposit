@@ -5,10 +5,10 @@
 	"keywords": ["Silverstripe", "silvershop", "shop", "ecommerce", "bank deposit", "direct credit"],
 	"require": {
 		"silvershop/core": "^3.0.0",
-		"omnipay/manual": "^2.2.1"
+		"omnipay/manual": "^3.0.0"
 	},
 	"require-dev": {
-		"omnipay/dummy": "^2.1.2"
+		"omnipay/dummy": "^3.0.0"
 	},
     "autoload": {
         "psr-4": {
