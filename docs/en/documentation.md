@@ -43,7 +43,7 @@
         <% if $TotalOutstanding %>
             <% if $Payments %>
                 <% loop $Payments.last %>
-                    <% if $GatewayTitle == "Bank Deposit" %>
+                    <% if $GatewayTitle == "Bank Deposit" %> <!-- manual gateway title in language file e.g. app/lang/en.yml -->
                         <% include SilverShop\Model\Order_BankDeposit %>
                     <% end_if %>
                 <% end_loop %>
