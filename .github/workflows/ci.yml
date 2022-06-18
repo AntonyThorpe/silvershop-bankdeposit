@@ -11,7 +11,7 @@ jobs:
   ci:
     uses: silverstripe/gha-ci/.github/workflows/ci.yml@v1
     with:
-      composer_require_extra: 
+      composer_require_extra:
         ralouphie/getallheaders:^3.0.3
-        league/omnipay:^3
-        phpunit/phpunit:^5.7
+        league/omnipay:^3.2.1
+        phpunit/phpunit:^5.7.27
