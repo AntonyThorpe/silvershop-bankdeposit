@@ -13,7 +13,7 @@
                 <td class="right">
                     <strong>
 
-                        <%-- Silvershop Bank Deposit --%>
+                        <!-- Silvershop Bank Deposit Order.ss TotalOutstanding.Nice -->
 						<% if $Status == "Unpaid" %>
 							$TotalOutstanding.Nice
 						<% else %>
@@ -23,7 +23,7 @@
 								<%t SilverShop\\Model\\Order.STATUS_PAID "Paid" %>
 							<% end_if %>
 						<% end_if %>
-                        <%-- end Silvershop Bank Deposit --%>
+                        <!-- end Silvershop Bank Deposit Order.ss TotalOutstanding.Nice -->
 
                     </strong>
                 </td>
@@ -47,7 +47,7 @@
     </table>
 <% end_if %>
 
-<%-- Silvershop Bank Deposit --%>
+<!-- Silvershop Bank Deposit Order.ss -->
 <% if $Total %>
     <% if $TotalOutstanding %>
         <% if $Payments %>
@@ -59,4 +59,4 @@
         <% end_if %>
     <% end_if %>
 <% end_if %>
-<%-- end Silvershop Bank Deposit --%>
+<!-- end Silvershop Bank Deposit Order.ss -->

@@ -70,6 +70,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
 
         //add item to cart via url
         $this->get(ShoppingCartController::add_item_link($this->laptop));
+        ShoppingCart::curr()->calculate();
     }
 
     public function testEmailIsSentUponStepCheckoutCompletion()
@@ -148,17 +149,10 @@ class SteppedCheckoutPageTest extends FunctionalTest
                     "enter summary page should load"
                 );
                 $self->assertContains(
-                    '<h2>My Account</h2>',
-                    $page->getBody(),
-                    "Account Page should load"
-                );
-
-                $self->assertContains(
                     'XX-3456-7891011-XX',
                     $page->getBody(),
                     "Account Page contains bank deposit instructions"
                 );
-
                 $self->assertEmailSent(
                     'test@example.com'
                 );

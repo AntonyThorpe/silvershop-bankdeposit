@@ -148,13 +148,13 @@
                                     $OrderForm
 
                                     <!--   $BankAccountPaymentMethodMessage in the test theme -->
-                        			<%-- Silvershop Bank Deposit --%>
+                        			<%-- Silvershop Bank Deposit Message --%>
                                     <% with $SiteConfig %>
                                         <div>
                                             $BankAccountPaymentMethodMessage
                                         </div>
                                     <% end_with %>
-                                    <%-- end Silvershop Bank Deposit --%>
+                                    <%-- end Silvershop Bank Deposit Message --%>
 
 
                                 <% end_if %>
