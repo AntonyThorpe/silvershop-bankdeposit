@@ -35,7 +35,7 @@ class AccountPageTest extends FunctionalTest
      */
     protected $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         ShopTest::setConfiguration();
@@ -68,17 +68,17 @@ class AccountPageTest extends FunctionalTest
                 $page = $self->get("account/"); // Past Orders page
                 $self->assertEquals(AccountPageController::class, $page->getHeader('X-TestPageClass'), "Account page should open");
 
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "Past Orders",
                     $page->getBody(),
                     "Account Page is open"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "Joe Bloggs",
                     $page->getBody(),
                     "Joe Bloggs is logged in"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "<td>$408.00</td>",
                     $page->getBody(),
                     "Past Order is listed"
@@ -91,27 +91,27 @@ class AccountPageTest extends FunctionalTest
                     $page->getStatusCode(),
                     "a page should load"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "Please deposit",
                     $page->getBody(),
                     "Opening statement is shown"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "XX-3456-7891011-XX",
                     $page->getBody(),
                     "Bank Account number is shown"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "Reference:",
                     $page->getBody(),
                     "Reference is shown"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "Your name",
                     $page->getBody(),
                     "Code is shown"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "$3950.00",
                     $page->getBody(),
                     "Total Outstanding is shown"
@@ -125,18 +125,18 @@ class AccountPageTest extends FunctionalTest
                     "a page should load"
                 );
 
-                $self->assertNotContains(
+                $self->assertStringNotContainsString(
                     "Please deposit",
                     $page->getBody(),
                     "Opening statement is not shown"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "$7900.00",
                     $page->getBody(),
                     "Total Outstanding is shown"
                 );
 
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "Paid",
                     $page->getBody(),
                     "'Paid' is displayed in place of Total Outstanding"
@@ -154,17 +154,17 @@ class AccountPageTest extends FunctionalTest
                         $page->getStatusCode(),
                         "a page should load"
                     );
-                    $self->assertNotContains(
+                    $self->assertStringNotContainsString(
                         "Please deposit",
                         $page->getBody(),
                         "Opening statement is not shown"
                     );
-                    $self->assertContains(
+                    $self->assertStringContainsString(
                         "$7900.00",
                         $page->getBody(),
                         "Total Outstanding is shown"
                     );
-                    $self->assertContains(
+                    $self->assertStringContainsString(
                         "Paid",
                         $page->getBody(),
                         "'Paid' is displayed in place of Total Outstanding"

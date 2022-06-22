@@ -37,7 +37,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
      */
     protected $laptop;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         ShopTest::setConfiguration();
@@ -117,13 +117,13 @@ class SteppedCheckoutPageTest extends FunctionalTest
                     "payment methods page should load"
                 );
 
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "CheckoutForm_PaymentMethodForm_PaymentMethod_Manual",
                     $page->getBody(),
                     "Manual payment method available"
                 );
 
-                $self->assertContains(
+                $self->assertStringContainsString(
                     "You will be notified of the bank account details",
                     $page->getBody(),
                     "Bank Account Message presented during the payment method section"
@@ -148,7 +148,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
                     $page->getStatusCode(),
                     "enter summary page should load"
                 );
-                $self->assertContains(
+                $self->assertStringContainsString(
                     'XX-3456-7891011-XX',
                     $page->getBody(),
                     "Account Page contains bank deposit instructions"
