@@ -4,13 +4,23 @@
 	"type": "silverstripe-vendormodule",
 	"keywords": ["Silverstripe", "silvershop", "shop", "ecommerce", "bank deposit", "direct credit"],
 	"require": {
-		"silvershop/core": "dev-main",
-		"omnipay/manual": "^3.0.0"
+        "silvershop/core": "dev-main",
+		"omnipay/manual": "^3.0.0",
+        "silverstripe/cms": "^5.1"
 	},
 	"require-dev": {
-		"omnipay/dummy": "^3.0.0",
+		"omnipay/dummy": "dev-master",
+        "php-http/guzzle7-adapter": "^1",
         "squizlabs/php_codesniffer": "^3.7.2"
 	},
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true,
+            "silverstripe/recipe-plugin": true,
+            "php-http/discovery": true
+        }
+    },
     "autoload": {
         "psr-4": {
             "AntonyThorpe\\SilverShopBankDeposit\\": "src/"
@@ -23,7 +33,7 @@
     },
 	"extra": {
 		"branch-alias": {
-			"dev-master": "4.*-dev"
+			"dev-master": "5.*-dev"
 		}
 	},
 	"license": "MIT",
