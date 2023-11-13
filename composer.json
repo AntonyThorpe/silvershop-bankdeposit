@@ -4,11 +4,12 @@
 	"type": "silverstripe-vendormodule",
 	"keywords": ["Silverstripe", "silvershop", "shop", "ecommerce", "bank deposit", "direct credit"],
 	"require": {
-		"silvershop/core": "^3.0.0",
+		"silvershop/core": "dev-main",
 		"omnipay/manual": "^3.0.0"
 	},
 	"require-dev": {
-		"omnipay/dummy": "^3.0.0"
+		"omnipay/dummy": "^3.0.0",
+        "squizlabs/php_codesniffer": "^3.7.2"
 	},
     "autoload": {
         "psr-4": {

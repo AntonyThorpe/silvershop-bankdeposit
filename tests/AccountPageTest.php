@@ -18,12 +18,12 @@ use SilverShop\Model\Order;
  */
 class AccountPageTest extends FunctionalTest
 {
-    protected static $fixture_file = array(
+    protected static $fixture_file = [
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
         'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
         'vendor/silvershop/core/tests/php/Fixtures/Orders.yml',
         'orders.yml'
-    );
+    ];
 
     /**
      * @var SilverStripe\ORM\DataObject
@@ -66,7 +66,11 @@ class AccountPageTest extends FunctionalTest
 
                 // Open Address Book page
                 $page = $self->get("account/"); // Past Orders page
-                $self->assertEquals(AccountPageController::class, $page->getHeader('X-TestPageClass'), "Account page should open");
+                $self->assertEquals(
+                    AccountPageController::class,
+                    $page->getHeader('X-TestPageClass'),
+                    "Account page should open"
+                );
 
                 $self->assertStringContainsString(
                     "Past Orders",
