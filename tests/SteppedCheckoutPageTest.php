@@ -33,7 +33,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
     protected static $disable_theme  = true;
 
     /**
-     * @var SilverStripe\ORM\DataObject
+     * @var Product
      */
     protected $laptop;
 

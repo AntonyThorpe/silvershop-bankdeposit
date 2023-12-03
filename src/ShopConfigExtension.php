@@ -17,7 +17,7 @@ class ShopConfigExtension extends DataExtension
         'BankAccountInvoiceMessage' => 'HTMLText'
     ];
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): void
     {
         $fields->addFieldsToTab(
             'Root.Shop.ShopTabs.' . _t('SilverShop\Extension\ShopConfigExtension.BankAccountTitle', 'Bank Account'),

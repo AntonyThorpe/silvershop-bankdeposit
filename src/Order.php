@@ -16,7 +16,7 @@ class Order extends DataExtension
      * Normally, an unpaid order will not generate an email.
      * @see onPlaceOrder is an extension within the placeOrder function within the OrderProcessor class
      */
-    public function onPlaceOrder()
+    public function onPlaceOrder(): void
     {
         $gateway = Checkout::get($this->owner)->getSelectedPaymentMethod();
         if (OrderProcessor::config()->bank_deposit_send_confirmation &&

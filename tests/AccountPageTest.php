@@ -26,7 +26,7 @@ class AccountPageTest extends FunctionalTest
     ];
 
     /**
-     * @var SilverStripe\ORM\DataObject
+     * @var AccountPage
      */
     protected $accountpage;
 
