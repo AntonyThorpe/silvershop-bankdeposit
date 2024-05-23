@@ -23,6 +23,9 @@ use SilverShop\Cart\ShoppingCartController;
  */
 class SteppedCheckoutPageGuestTest extends FunctionalTest
 {
+    /**
+     * @var array<string>
+     */
     protected static $fixture_file = [
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
         'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
@@ -30,10 +33,13 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
         'orders.yml'
     ];
 
+    /**
+     * @var bool
+     */
     protected static $disable_theme  = true;
 
     /**
-     * @var Product
+     * @var DataObject
      */
     protected $laptop;
 
@@ -66,13 +72,13 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
         ShoppingCart::curr()->calculate();
     }
 
-    public function testEmailIsSentUponStepCheckoutCompletionByGuest()
+    public function testEmailIsSentUponStepCheckoutCompletionByGuest(): void
     {
         $self = $this;
         $this->useTestTheme(
-            dirname(__FILE__),
+            __DIR__,
             'testtheme',
-            function () use ($self) {
+            function () use ($self): void {
                 $page = $self->get("checkout/");
                 $self->assertEquals(
                     200,

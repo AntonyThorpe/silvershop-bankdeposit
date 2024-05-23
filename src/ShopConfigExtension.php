@@ -10,7 +10,11 @@ use SilverStripe\ORM\DataExtension;
 
 class ShopConfigExtension extends DataExtension
 {
-    private static $db = [
+    /**
+     * @config
+     * @var array
+     */
+    private static array $db = [
         'BankAccountPaymentMethodMessage' => 'Text',
         'BankAccountNumber' => 'Text',
         'BankAccountDetails' => 'Text',

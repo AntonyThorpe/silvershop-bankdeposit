@@ -18,7 +18,7 @@ class Order extends DataExtension
      */
     public function onPlaceOrder(): void
     {
-        $gateway = Checkout::get($this->owner)->getSelectedPaymentMethod();
+        $gateway = Checkout::get($this->getOwner())->getSelectedPaymentMethod();
         if (OrderProcessor::config()->bank_deposit_send_confirmation &&
             GatewayInfo::isManual($gateway) &&
             $this->owner->Status == "Unpaid"

@@ -18,6 +18,9 @@ use SilverShop\Model\Order;
  */
 class AccountPageTest extends FunctionalTest
 {
+    /**
+     * @var array
+     */
     protected static $fixture_file = [
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
         'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
@@ -26,7 +29,7 @@ class AccountPageTest extends FunctionalTest
     ];
 
     /**
-     * @var AccountPage
+     * @var DataObject
      */
     protected $accountpage;
 
@@ -50,16 +53,16 @@ class AccountPageTest extends FunctionalTest
         Controller::add_extension(ShopTestControllerExtension::class);
         $this->accountpage = $this->objFromFixture(AccountPage::class, "accountpage");
         $this->accountpage->publishSingle();
-        $this->controller = new AccountPageController($this->accountpage);
+        $this->controller = new AccountPageController();
     }
 
-    public function testCanViewAccountPagePastOrdersAndIndividualOrders()
+    public function testCanViewAccountPagePastOrdersAndIndividualOrders(): void
     {
         $self = $this;
         $this->useTestTheme(
-            dirname(__FILE__),
+            __DIR__,
             'testtheme',
-            function () use ($self) {
+            function () use ($self): void {
                 $member = $self->objFromFixture(Member::class, "joebloggs");
                 $self->logInAs($member);
                 $self->controller->init(); //re-init to connect up member
@@ -147,10 +150,10 @@ class AccountPageTest extends FunctionalTest
                 );
 
                 // test other order statuses
-                $order = Order::get()->byId("11");
+                $order = Order::get()->byId(11);
                 $statuses = ["Sent", "Complete", "AdminCancelled", "MemberCancelled"];
                 foreach ($statuses as $status) {
-                    $order->Status = $status;
+                    $order->setField('Status', $status);
 
                     $page = $self->get("account/order/11");
                     $self->assertEquals(
