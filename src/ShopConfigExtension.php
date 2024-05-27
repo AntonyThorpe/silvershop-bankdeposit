@@ -12,7 +12,6 @@ class ShopConfigExtension extends DataExtension
 {
     /**
      * @config
-     * @var array
      */
     private static array $db = [
         'BankAccountPaymentMethodMessage' => 'Text',

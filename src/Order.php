@@ -21,7 +21,7 @@ class Order extends DataExtension
         $gateway = Checkout::get($this->getOwner())->getSelectedPaymentMethod();
         if (OrderProcessor::config()->bank_deposit_send_confirmation &&
             GatewayInfo::isManual($gateway) &&
-            $this->owner->Status == "Unpaid"
+            $this->getOwner()->Status == "Unpaid"
         ) {
             OrderProcessor::config()->send_confirmation = true;
         } else {
