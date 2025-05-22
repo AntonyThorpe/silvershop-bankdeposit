@@ -4,16 +4,12 @@ namespace AntonyThorpe\SilverShopBankDeposit\Tests;
 
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Security\Member;
 use SilverStripe\View\SSViewer;
 use SilverShop\Tests\ShopTest;
 use SilverShop\Extension\SteppedCheckoutExtension;
 use SilverShop\Page\Product;
 use SilverShop\Page\CheckoutPage;
-use SilverShop\Page\AccountPage;
-use SilverShop\Model\Order;
 use SilverShop\Cart\ShoppingCart;
 use SilverShop\Cart\ShoppingCartController;
 
