@@ -1,0 +1,8 @@
+includes:
+  - vendor/cambis/silverstan/phpstan.neon
+
+parameters:
+  level: 9
+  paths:
+   - src
+   - tests

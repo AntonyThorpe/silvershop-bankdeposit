@@ -17,3 +17,21 @@ jobs:
         moneyphp/money:^4.3.0
         silverstripe/installer:^5.1
         silverstripe/recipe-cms:^5.1
+
+  phpstan:
+    name: PHPStan Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+          tools: composer:v2
+      - name: Install Dependencies
+        run: |
+          composer require --dev cambis/silverstan --no-update
+          composer update --no-interaction --prefer-dist
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse -c phpstan.neon --memory-limit 1G
