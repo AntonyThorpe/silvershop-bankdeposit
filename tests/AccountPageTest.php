@@ -38,7 +38,7 @@ class AccountPageTest extends FunctionalTest
      */
     protected $controller;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         ShopTest::setConfiguration();
@@ -53,6 +53,7 @@ class AccountPageTest extends FunctionalTest
         Controller::add_extension(ShopTestControllerExtension::class);
         $this->accountpage = $this->objFromFixture(AccountPage::class, "accountpage");
         $this->accountpage->publishSingle();
+
         $this->controller = AccountPageController::create();
     }
 

@@ -41,7 +41,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
      */
     protected $laptop;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         ShopTest::setConfiguration();
