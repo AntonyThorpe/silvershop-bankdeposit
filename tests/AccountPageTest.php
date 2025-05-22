@@ -53,7 +53,7 @@ class AccountPageTest extends FunctionalTest
         Controller::add_extension(ShopTestControllerExtension::class);
         $this->accountpage = $this->objFromFixture(AccountPage::class, "accountpage");
         $this->accountpage->publishSingle();
-        $this->controller = new AccountPageController();
+        $this->controller = AccountPageController::create();
     }
 
     public function testCanViewAccountPagePastOrdersAndIndividualOrders(): void

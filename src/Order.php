@@ -2,12 +2,15 @@
 
 namespace AntonyThorpe\SilvershopBankDeposit;
 
+use SilverStripe\Core\Extension;
 use SilverStripe\Omnipay\GatewayInfo;
 use SilverShop\Checkout\Checkout;
 use SilverShop\Checkout\OrderProcessor;
-use SilverStripe\ORM\DataExtension;
 
-class Order extends DataExtension
+/**
+ * @extends Extension<\SilverShop\Model\Order&static>
+ */
+class Order extends Extension
 {
     /**
      * Send an email with a copy of the order for payment

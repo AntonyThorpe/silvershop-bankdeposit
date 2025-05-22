@@ -2,13 +2,21 @@
 
 namespace AntonyThorpe\SilvershopBankDeposit;
 
+use SilverStripe\Core\Extension;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataExtension;
 
-class ShopConfigExtension extends DataExtension
+/**
+ * @property ?string $BankAccountPaymentMethodMessage
+ * @property ?string $BankAccountNumber
+ * @property ?string $BankAccountDetails
+ * @property ?string $BankAccountInvoiceMessage
+ * @extends Extension<SiteConfig&static>
+ */
+class ShopConfigExtension extends Extension
 {
     /**
      * @config
