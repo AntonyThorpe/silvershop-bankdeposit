@@ -1,5 +1,5 @@
 includes:
-  - vendor/cambis/silverstan/phpstan.neon
+  - vendor/cambis/silverstan/extension.neon
 
 parameters:
   level: 9
