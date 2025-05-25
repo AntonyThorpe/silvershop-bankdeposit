@@ -17,18 +17,23 @@ class Order extends Extension
      *
      * Accessing the extension point is needed to dynamically set send_confirmation to true.
      * Normally, an unpaid order will not generate an email.
+     *
      * @see onPlaceOrder is an extension within the placeOrder function within the OrderProcessor class
      */
     public function onPlaceOrder(): void
     {
-        $gateway = Checkout::get($this->getOwner())->getSelectedPaymentMethod();
-        if (OrderProcessor::config()->bank_deposit_send_confirmation &&
-            GatewayInfo::isManual($gateway) &&
-            $this->getOwner()->Status == "Unpaid"
-        ) {
-            OrderProcessor::config()->send_confirmation = true;
-        } else {
-            OrderProcessor::config()->send_confirmation = false;
+        $checkout = Checkout::get($this->getOwner());
+        if ($checkout instanceof Checkout) {
+            $gateway = $checkout->getSelectedPaymentMethod();
+            if ($gateway
+                && OrderProcessor::config()->bank_deposit_send_confirmation
+                && GatewayInfo::isManual($gateway)
+                && $this->getOwner()->Status == "Unpaid"
+            ) {
+                OrderProcessor::config()->send_confirmation = true;
+            } else {
+                OrderProcessor::config()->send_confirmation = false;
+            }
         }
     }
 }
