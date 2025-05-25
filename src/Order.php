@@ -26,13 +26,13 @@ class Order extends Extension
         if ($checkout instanceof Checkout) {
             $gateway = $checkout->getSelectedPaymentMethod();
             if ($gateway
-                && OrderProcessor::config()->bank_deposit_send_confirmation
+                && OrderProcessor::config()->get('bank_deposit_send_confirmation')
                 && GatewayInfo::isManual($gateway)
                 && $this->getOwner()->Status == "Unpaid"
             ) {
-                OrderProcessor::config()->send_confirmation = true;
+                OrderProcessor::config()->set('send_confirmation', true);
             } else {
-                OrderProcessor::config()->send_confirmation = false;
+                OrderProcessor::config()->set('send_confirmation', false);
             }
         }
     }

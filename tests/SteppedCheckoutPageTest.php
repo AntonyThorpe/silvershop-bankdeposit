@@ -21,9 +21,6 @@ use SilverShop\Cart\ShoppingCartController;
  */
 class SteppedCheckoutPageTest extends FunctionalTest
 {
-    /**
-     * @var array
-     */
     protected static $fixture_file = [
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
         'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
@@ -34,12 +31,9 @@ class SteppedCheckoutPageTest extends FunctionalTest
     /**
      * @var bool
      */
-    protected static $disable_theme  = true;
+    protected static $disable_themes  = true;
 
-    /**
-     * @var DataObject
-     */
-    protected $laptop;
+    protected DataObject $laptop;
 
     protected function setUp(): void
     {
@@ -55,7 +49,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
         $siteconfig->BankAccountInvoiceMessage = "Hey bo, just pop the dosh in the account";
         $siteconfig->write();
 
-        SSViewer::config()->source_file_comments = true;
+        SSViewer::config()->get('source_file_comments = true');
 
         // establish products
         $this->laptop = $this->objFromFixture(Product::class, "laptop");
@@ -73,7 +67,7 @@ class SteppedCheckoutPageTest extends FunctionalTest
         $this->logInAs($member);
 
         //add item to cart via url
-        $this->get(ShoppingCartController::add_item_link($this->laptop));
+        $this->get((string) ShoppingCartController::add_item_link($this->laptop));
         ShoppingCart::curr()->calculate();
     }
 
@@ -92,11 +86,15 @@ class SteppedCheckoutPageTest extends FunctionalTest
                 );
 
                 // contact form
-                $page = $self->submitForm("CheckoutForm_ContactDetailsForm", "action_checkoutSubmit", [
-                    'CustomerDetailsCheckoutComponent_FirstName' => 'Joe',
-                    'CustomerDetailsCheckoutComponent_Surname' => 'Bloggs',
-                    'CustomerDetailsCheckoutComponent_Email' => 'test@example.com'
-                ]);
+                $page = $self->submitForm(
+                    "CheckoutForm_ContactDetailsForm",
+                    "action_checkoutSubmit",
+                    [
+                        'CustomerDetailsCheckoutComponent_FirstName' => 'Joe',
+                        'CustomerDetailsCheckoutComponent_Surname' => 'Bloggs',
+                        'CustomerDetailsCheckoutComponent_Email' => 'test@example.com'
+                    ]
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -104,17 +102,20 @@ class SteppedCheckoutPageTest extends FunctionalTest
                 );
 
                 // Shipping Address form
-                $page = $self->submitForm("CheckoutForm_ShippingAddressForm", "action_setshippingaddress", [
-                    'ShippingAddressCheckoutComponent_Country' => 'AU',
-                    'ShippingAddressCheckoutComponent_Address' => '201-203 BROADWAY AVE',
-                    'ShippingAddressCheckoutComponent_AddressLine2' => 'U 235',
-                    'ShippingAddressCheckoutComponent_City' => 'WEST BEACH',
-                    'ShippingAddressCheckoutComponent_State' => 'South Australia',
-                    'ShippingAddressCheckoutComponent_PostalCode' => '5024',
-                    'ShippingAddressCheckoutComponent_Phone' => '',
-                    'SeperateBilling' => false
-
-                ]);
+                $page = $self->submitForm(
+                    "CheckoutForm_ShippingAddressForm",
+                    "action_setshippingaddress",
+                    [
+                        'ShippingAddressCheckoutComponent_Country' => 'AU',
+                        'ShippingAddressCheckoutComponent_Address' => '201-203 BROADWAY AVE',
+                        'ShippingAddressCheckoutComponent_AddressLine2' => 'U 235',
+                        'ShippingAddressCheckoutComponent_City' => 'WEST BEACH',
+                        'ShippingAddressCheckoutComponent_State' => 'South Australia',
+                        'ShippingAddressCheckoutComponent_PostalCode' => '5024',
+                        'ShippingAddressCheckoutComponent_Phone' => '',
+                        'SeperateBilling' => false
+                    ]
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -134,9 +135,11 @@ class SteppedCheckoutPageTest extends FunctionalTest
                 );
 
                 // Payment Method can be manual
-                $page = $self->submitForm("CheckoutForm_PaymentMethodForm", "action_setpaymentmethod", [
-                    'PaymentMethod' => 'Manual',
-                ]);
+                $page = $self->submitForm(
+                    "CheckoutForm_PaymentMethodForm",
+                    "action_setpaymentmethod",
+                    ['PaymentMethod' => 'Manual']
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -144,9 +147,11 @@ class SteppedCheckoutPageTest extends FunctionalTest
                 );
 
                 // Summary
-                $page = $self->submitForm("PaymentForm_ConfirmationForm", "action_checkoutSubmit", [
-                    'PaymentForm_ConfirmationForm_Notes' => 'Test',
-                ]);
+                $page = $self->submitForm(
+                    "PaymentForm_ConfirmationForm",
+                    "action_checkoutSubmit",
+                    ['PaymentForm_ConfirmationForm_Notes' => 'Test']
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),

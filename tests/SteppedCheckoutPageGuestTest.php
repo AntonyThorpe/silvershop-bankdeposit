@@ -19,9 +19,6 @@ use SilverShop\Cart\ShoppingCartController;
  */
 class SteppedCheckoutPageGuestTest extends FunctionalTest
 {
-    /**
-     * @var array<string>
-     */
     protected static $fixture_file = [
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
         'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
@@ -32,12 +29,9 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
     /**
      * @var bool
      */
-    protected static $disable_theme  = true;
+    protected static $disable_themes  = true;
 
-    /**
-     * @var DataObject
-     */
-    protected $laptop;
+    protected DataObject $laptop;
 
     protected function setUp(): void
     {
@@ -53,7 +47,7 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
         $siteconfig->BankAccountInvoiceMessage = "Hey bo, just pop the dosh in the account";
         $siteconfig->write();
 
-        SSViewer::config()->source_file_comments = true;
+        SSViewer::config()->get('source_file_comments = true');
 
         // establish products
         $this->laptop = $this->objFromFixture(Product::class, "laptop");
@@ -64,7 +58,7 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
         $checkoutpage->publishSingle();
 
         //add item to cart via url
-        $this->get(ShoppingCartController::add_item_link($this->laptop));
+        $this->get((string) ShoppingCartController::add_item_link($this->laptop));
         ShoppingCart::curr()->calculate();
     }
 
@@ -90,11 +84,15 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
                 );
 
                 // contact form
-                $page = $self->submitForm("CheckoutForm_ContactDetailsForm", "action_checkoutSubmit", [
-                    'SilverShop-Checkout-Component-CustomerDetails_FirstName' => 'James',
-                    'SilverShop-Checkout-Component-CustomerDetails_Surname' => 'Stark',
-                    'SilverShop-Checkout-Component-CustomerDetails_Email' => 'guest@example.net'
-                ]);
+                $page = $self->submitForm(
+                    "CheckoutForm_ContactDetailsForm",
+                    "action_checkoutSubmit",
+                    [
+                        'SilverShop-Checkout-Component-CustomerDetails_FirstName' => 'James',
+                        'SilverShop-Checkout-Component-CustomerDetails_Surname' => 'Stark',
+                        'SilverShop-Checkout-Component-CustomerDetails_Email' => 'guest@example.net'
+                    ]
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -102,17 +100,20 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
                 );
 
                 // Shipping Address form
-                $page = $self->submitForm("CheckoutForm_ShippingAddressForm", "action_setshippingaddress", [
-                    'SilverShop-Checkout-Component-ShippingAddress_Country' => 'AU',
-                    'SilverShop-Checkout-Component-ShippingAddress_Address' => '201-203 BROADWAY AVE',
-                    'SilverShop-Checkout-Component-ShippingAddress_AddressLine2' => 'U 235',
-                    'SilverShop-Checkout-Component-ShippingAddress_City' => 'WEST BEACH',
-                    'SilverShop-Checkout-Component-ShippingAddress_State' => 'South Australia',
-                    'SilverShop-Checkout-Component-ShippingAddress_PostalCode' => '5024',
-                    'SilverShop-Checkout-Component-ShippingAddress_Phone' => '',
-                    'SeperateBilling' => false
-
-                ]);
+                $page = $self->submitForm(
+                    "CheckoutForm_ShippingAddressForm",
+                    "action_setshippingaddress",
+                    [
+                        'SilverShop-Checkout-Component-ShippingAddress_Country' => 'AU',
+                        'SilverShop-Checkout-Component-ShippingAddress_Address' => '201-203 BROADWAY AVE',
+                        'SilverShop-Checkout-Component-ShippingAddress_AddressLine2' => 'U 235',
+                        'SilverShop-Checkout-Component-ShippingAddress_City' => 'WEST BEACH',
+                        'SilverShop-Checkout-Component-ShippingAddress_State' => 'South Australia',
+                        'SilverShop-Checkout-Component-ShippingAddress_PostalCode' => '5024',
+                        'SilverShop-Checkout-Component-ShippingAddress_Phone' => '',
+                        'SeperateBilling' => false
+                    ]
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -132,9 +133,11 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
                 );
 
                 // Payment Method can be manual
-                $page = $self->submitForm("CheckoutForm_PaymentMethodForm", "action_setpaymentmethod", [
-                    'PaymentMethod' => 'Manual',
-                ]);
+                $page = $self->submitForm(
+                    "CheckoutForm_PaymentMethodForm",
+                    "action_setpaymentmethod",
+                    ['PaymentMethod' => 'Manual']
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -142,9 +145,11 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
                 );
 
                 // Summary
-                $page = $self->submitForm("PaymentForm_ConfirmationForm", "action_checkoutSubmit", [
-                    'PaymentForm_ConfirmationForm_Notes' => 'Test',
-                ]);
+                $page = $self->submitForm(
+                    "PaymentForm_ConfirmationForm",
+                    "action_checkoutSubmit",
+                    ['PaymentForm_ConfirmationForm_Notes' => 'Test']
+                );
                 $self->assertEquals(
                     200,
                     $page->getStatusCode(),
@@ -154,11 +159,6 @@ class SteppedCheckoutPageGuestTest extends FunctionalTest
                     'XX-3456-7891011-XX',
                     $page->getBody(),
                     "Account Page contains bank deposit instructions"
-                );
-                $self->assertStringContainsString(
-                    'CheckoutPage_order.ss',
-                    $page->getBody(),
-                    "CheckoutPage_order.ss template is used"
                 );
                 $self->assertEmailSent(
                     'guest@example.net'

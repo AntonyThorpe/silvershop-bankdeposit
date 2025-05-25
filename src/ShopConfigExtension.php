@@ -14,13 +14,10 @@ use SilverStripe\Forms\FieldList;
  * @property ?string $BankAccountNumber
  * @property ?string $BankAccountDetails
  * @property ?string $BankAccountInvoiceMessage
- * @extends Extension<SiteConfig&static>
+ * @extends  Extension<SiteConfig&static>
  */
 class ShopConfigExtension extends Extension
 {
-    /**
-     * @config
-     */
     private static array $db = [
         'BankAccountPaymentMethodMessage' => 'Text',
         'BankAccountNumber' => 'Text',
@@ -28,9 +25,9 @@ class ShopConfigExtension extends Extension
         'BankAccountInvoiceMessage' => 'HTMLText'
     ];
 
-    public function updateCMSFields(FieldList $fields): void
+    public function updateCMSFields(FieldList $fieldList): void
     {
-        $fields->addFieldsToTab(
+        $fieldList->addFieldsToTab(
             'Root.Shop.ShopTabs.' . _t('SilverShop\Extension\ShopConfigExtension.BankAccountTitle', 'Bank Account'),
             [
                 Textfield::create(

@@ -18,9 +18,6 @@ use SilverShop\Model\Order;
  */
 class AccountPageTest extends FunctionalTest
 {
-    /**
-     * @var array
-     */
     protected static $fixture_file = [
         'vendor/silvershop/core/tests/php/Fixtures/Pages.yml',
         'vendor/silvershop/core/tests/php/Fixtures/shop.yml',
